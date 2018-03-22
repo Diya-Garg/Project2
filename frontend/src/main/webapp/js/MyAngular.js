@@ -1,0 +1,19 @@
+var app=angular.module("myApp",["ngRoute"]);
+app.config(function($routeProvider){
+	$routeProvider
+	.when("/",{
+		templateUrl:"home.html"
+	})
+	.when("/contact",{
+		templateUrl:"contactus.html"
+	})
+	.when("/login",{
+		templateUrl:"Login.html"
+	})
+	.when("/register",{
+		templateUrl:"Register.html"
+	})
+	.when("/about",{
+		templateUrl:"aboutus.html"
+	});
+});
