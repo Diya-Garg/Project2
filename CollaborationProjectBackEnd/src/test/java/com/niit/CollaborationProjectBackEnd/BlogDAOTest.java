@@ -2,6 +2,7 @@ package com.niit.CollaborationProjectBackEnd;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.niit.dao.BlogDAO;
 import com.niit.model.Blog;
+import com.niit.model.BlogComment;
 
 public class BlogDAOTest {
 
@@ -33,8 +35,8 @@ public class BlogDAOTest {
 	public void addBlogTest(){
 		System.out.println("In addBlogTest");
 		Blog blog=new Blog();
-		blog.setBlogName("Struts");
-		blog.setBlogContent("Struts -MVC");
+		blog.setBlogName("Angular 4");
+		blog.setBlogContent("Works on Typescript");
 		blog.setLoginName("Travera");
 		blog.setStatus("NA");
 		blog.setCreateDate(new java.util.Date());
@@ -79,8 +81,8 @@ public class BlogDAOTest {
 	@Test
 	@Ignore
 	public void testDeleteBlog(){
-		
-		assertEquals("Blog Deleted Succesfully", true,blogDAO.deleteBlog(150));
+		Blog blog=blogDAO.getBlog(150);
+		assertEquals("Blog Deleted Succesfully", true,blogDAO.deleteBlog(blog));
 	}
 	
 	@Test
@@ -97,5 +99,55 @@ public class BlogDAOTest {
 		assertEquals("Blog rejected succesfully", blogDAO.rejectBlog(blog));
 	}
 	
-
+	@Test
+	@Ignore
+	public void testIncrementLikes(){
+		Blog blog=blogDAO.getBlog(50);
+		System.out.println("Blog Object : "+blog);
+		assertEquals("Likes incremented succesfully", blogDAO.incrementLikes(blog));
+	}
+	
+	@Test
+	@Ignore
+	public void testAddBlogComment(){
+		System.out.println("Adding Blog Comment");
+		BlogComment blogComment=new BlogComment();
+		blogComment.setCommentText("Hibernate is used to solve the impedence mismatch b/w Relational database management system and Object Oriented Programming");
+		blogComment.setLoginname("John");
+		blogComment.setBlogId(50);
+		blogComment.setCommentDate(new Date());
+		assertEquals("Blog Comment Added", blogDAO.addBlogComment(blogComment));
+		
+	}
+	
+	@Test
+	@Ignore
+	public void testDeleteBlogComment(){
+		BlogComment comment=blogDAO.getBlogComment(100);
+		assertEquals("Comment Deleted Succesfully", true,blogDAO.deleteBlogComment(comment));
+	}
+	
+	@Test
+	@Ignore
+	public void testGetBlogComment(){
+		assertNotNull("Blog Comment fetched succesfully",blogDAO.getBlogComment(100));
+	}
+	
+ 
+	@Test
+	@Ignore
+	public void listBlogComments(){
+		List<BlogComment> blogComments=blogDAO.listBlogComments(50);
+		if(blogComments.size()==0){
+			assertTrue("Comments Doesnt exist for blog having blog id",blogComments.size()==0);
+		}
+		else {
+			for(BlogComment comment :blogComments){
+				System.out.println("\n\n"+comment);
+			}
+		}
+	}
 }
+
+
+

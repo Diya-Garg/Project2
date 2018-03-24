@@ -13,8 +13,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
-@Table
-@SequenceGenerator(name="blogidseq",sequenceName="blog_id_seq")
+@Table(name="Blog")
+@SequenceGenerator(name="blogidseq",sequenceName="blogidsequence")
 public class Blog {
 
 	@Id
@@ -29,6 +29,7 @@ public class Blog {
 	String loginName;
 	String status;
 	int likes;
+	
 	public int getBlogId() {
 		return blogId;
 	}
