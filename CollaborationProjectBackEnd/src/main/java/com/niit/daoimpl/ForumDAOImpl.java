@@ -81,27 +81,48 @@ public class ForumDAOImpl implements ForumDAO{
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createQuery("from com.niit.model.Forum where loginName=:uname");
 		query.setParameter("uname",userName);
-		return query.list();
+		List<Forum> list=query.list();
+		System.out.println("List = "+list);
+		return list;
 	}
 
-	public boolean addForumComment(ForumComment ForumComment) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addForumComment(ForumComment forumComment) {
+		Session session=sessionFactory.getCurrentSession();
+		try{
+			session.save(forumComment);
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
 	}
 
-	public boolean deleteForumComment(ForumComment ForumComment) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteForumComment(ForumComment forumComment) {
+		Session session=sessionFactory.getCurrentSession();
+		try{
+			session.delete(forumComment);
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	
 	}
 
 	public ForumComment getForumComment(int commentId) {
-		// TODO Auto-generated method stub
-		return null;
+		ForumComment comment=(ForumComment)sessionFactory.getCurrentSession().get(ForumComment.class,commentId);
+		return comment;
 	}
 
-	public List<ForumComment> listForumComments(int ForumId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ForumComment> listForumComments(int forumId) {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from com.niit.model.ForumComment where forumId=:id");
+		query.setParameter("id",forumId);
+		List<ForumComment> list=query.list();
+		System.out.println("List = "+list);
+		return list;
 	}
 
 }

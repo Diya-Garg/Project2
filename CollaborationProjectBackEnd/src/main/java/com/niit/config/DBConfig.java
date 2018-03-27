@@ -19,9 +19,13 @@ import com.niit.dao.BlogDAO;
 import com.niit.dao.ForumDAO;
 import com.niit.daoimpl.BlogDAOImpl;
 import com.niit.daoimpl.ForumDAOImpl;
+import com.niit.model.ApplyJob;
 import com.niit.model.Blog;
 import com.niit.model.BlogComment;
 import com.niit.model.Forum;
+import com.niit.model.ForumComment;
+import com.niit.model.Job;
+import com.niit.model.UserDetails;
 
 
 
@@ -56,6 +60,10 @@ public class DBConfig {
 		sessionFactoryBuilder.addAnnotatedClass(Blog.class);
 		sessionFactoryBuilder.addAnnotatedClass(BlogComment.class);
 		sessionFactoryBuilder.addAnnotatedClass(Forum.class);
+		sessionFactoryBuilder.addAnnotatedClass(ForumComment.class);
+		sessionFactoryBuilder.addAnnotatedClass(Job.class);
+		sessionFactoryBuilder.addAnnotatedClass(ApplyJob.class);
+		sessionFactoryBuilder.addAnnotatedClass(UserDetails.class);
 		
 		SessionFactory sessionFactory=sessionFactoryBuilder.buildSessionFactory();
 		System.out.println("====SessionFactory Object======");
@@ -80,5 +88,6 @@ public class DBConfig {
 		System.out.println("Creating Forum DAO");
 		return new ForumDAOImpl();
 	}
+	
 	
 }
