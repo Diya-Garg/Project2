@@ -4,22 +4,29 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
 @Table
+@SequenceGenerator(name="jobidseq",sequenceName="job_id_sequence")
 public class Job {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="jobidseq")
 	private int jobId;
 	private String jobDesignation;
 	private String company;
 	private int salary;
 	private String location;
 	private String jobDesc;
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy")
 	private Date lastDateApply;
 	
 	
