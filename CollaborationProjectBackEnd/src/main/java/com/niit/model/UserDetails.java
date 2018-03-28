@@ -10,25 +10,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-@SequenceGenerator(name="useridseq",sequenceName="useridsequence")
 public class UserDetails {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="useridseq")
-	private int userId;
+	private String loginName;
 	private String firstName;
 	private String lastName;
 	private String password;
 	private String email;
 	private String role;
-	private String status;
-	
-	
-	public int getUserId() {
-		return userId;
+	private String onlineStatus;
+	private String mobileNumber;
+	public String getLoginName() {
+		return loginName;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -60,19 +57,25 @@ public class UserDetails {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public String getStatus() {
-		return status;
+	public String getOnlineStatus() {
+		return onlineStatus;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setOnlineStatus(String onlineStatus) {
+		this.onlineStatus = onlineStatus;
 	}
-	@Override
-	public String toString() {
-		return "UserDetails [userId=" + userId + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", password=" + password
-				+ ", email=" + email + ", role=" + role + ", status=" + status
-				+ "]";
+	public String getMobileNumber() {
+		return mobileNumber;
 	}
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+	
+	
+	
+	
+	
+	
+
 	
 	
 	  

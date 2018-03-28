@@ -69,7 +69,9 @@ public class BlogController {
 	
 	@GetMapping(value="/deleteBlog/{blogId}")
 	public ResponseEntity<String> deleteBlog(@PathVariable int blogId){
-		if(blogDAO.deleteBlog(blogId)){
+		Blog blog=blogDAO.getBlog(blogId);
+		
+		if(blogDAO.deleteBlog(blog)){
 			return new ResponseEntity<String>("Blog Deleted Succesfully",HttpStatus.OK);
 		}
 		else {

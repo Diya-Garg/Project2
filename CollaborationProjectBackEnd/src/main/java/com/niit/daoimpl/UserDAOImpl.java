@@ -21,7 +21,7 @@ public class UserDAOImpl implements UserDAO {
 	SessionFactory sessionFactory;
 	
 	
-	public boolean addUser(UserDetails user) {
+	public boolean registerUser(UserDetails user) {
 		try{
 			sessionFactory.getCurrentSession().save(user);
 			return true;
@@ -43,10 +43,10 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
-	public UserDetails getUser(int userId) {
+	public UserDetails getUser(String loginName) {
 		try{
 			Session session=sessionFactory.getCurrentSession();
-			UserDetails user=(UserDetails)session.get(UserDetails.class, userId);
+			UserDetails user=(UserDetails)session.get(UserDetails.class, loginName);
 			return user;
 		}
 		catch(Exception e){
@@ -64,6 +64,40 @@ public class UserDAOImpl implements UserDAO {
 	public boolean deleteUser(UserDetails user) {
 		try{
 			sessionFactory.getCurrentSession().delete(user);
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean checkLogin(UserDetails user) {
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			Query query=session.createQuery("from UserDetails where loginName=:x and password=:y");
+			query.setParameter("x",user.getLoginName());
+			query.setParameter("y",user.getPassword());
+			
+			List<UserDetails> list=query.list();
+			if(list.size()>0){
+				UserDetails userDetailsObj=list.get(0);
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean updateOnlineStatus(String status, UserDetails user) {
+		try{
+			user.setOnlineStatus(status);
+			sessionFactory.getCurrentSession().update(user);
 			return true;
 		}
 		catch(Exception e){
