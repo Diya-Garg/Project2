@@ -75,9 +75,11 @@ public class BlogDAOImpl implements BlogDAO {
 		try{
 			blog.setStatus("A");
 			sessionFactory.getCurrentSession().update(blog);
+			System.out.println("I m here 1 ");
 			return true;
 		}
 		catch(Exception e){
+			System.out.println("I m here 2 ");
 			e.printStackTrace();
 		return false;
 		}

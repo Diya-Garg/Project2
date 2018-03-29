@@ -1,5 +1,7 @@
 package com.niit.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,62 @@ public class UserController {
 	@Autowired
 	UserDAO userDAO;
 	
+
+	
+	
+	@GetMapping(value="/updateOnlineStatus/{status}/{loginName}")
+	public ResponseEntity<String> updateOnlineStatus(@PathVariable String status,@PathVariable String loginName){
+		System.out.println("Status : "+status);
+		System.out.println("Loginname : "+loginName);
+		if(userDAO.updateOnlineStatus(status, loginName)){
+			return new ResponseEntity<String>("Status Updated Succesfully",HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Not able to update status succesfully",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+	
+	@PostMapping("/deleteUser")
+	public ResponseEntity<String> deleteUser(@RequestBody UserDetails user){
+		UserDetails userObj=userDAO.getUser(user.getLoginName());
+		if(userDAO.deleteUser(userObj)){
+			return new ResponseEntity<String>("User deleted succesfully...",HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Problem in deleting User...",HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@PostMapping("/updateUser")
+	public ResponseEntity<String> updateUser(@RequestBody UserDetails user){
+		
+		if(userDAO.updateUser(user)){
+			return new ResponseEntity<String>("User updated succesfully...",HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Problem in updating User...",HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
+	@GetMapping(value="/getListOfUsers")
+	public ResponseEntity<List<UserDetails>> getUsersList(){
+		List<UserDetails> list=userDAO.getUserDetails();
+		if(list.size()==0){
+			return new ResponseEntity<List<UserDetails>>(list,HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<List<UserDetails>>(list,HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	
 	@PostMapping(value="/login")
 	public ResponseEntity<UserDetails> checkLogin(@RequestBody UserDetails userDetails){
 		if(userDAO.checkLogin(userDetails)){
 			UserDetails user=(UserDetails)userDAO.getUser(userDetails.getLoginName());
-			userDAO.updateOnlineStatus("Y", user);
+			userDAO.updateOnlineStatus("Y", user.getLoginName());
 			return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 			
 		}

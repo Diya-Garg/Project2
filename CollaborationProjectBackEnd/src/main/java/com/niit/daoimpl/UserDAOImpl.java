@@ -20,7 +20,6 @@ public class UserDAOImpl implements UserDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	
 	public boolean registerUser(UserDetails user) {
 		try{
 			sessionFactory.getCurrentSession().save(user);
@@ -94,10 +93,13 @@ public class UserDAOImpl implements UserDAO {
 		return false;
 	}
 
-	public boolean updateOnlineStatus(String status, UserDetails user) {
+	public boolean updateOnlineStatus(String status, String loginName) {
 		try{
+			Session session=sessionFactory.getCurrentSession();
+			UserDetails user=(UserDetails)session.get(UserDetails.class,loginName);
+			
 			user.setOnlineStatus(status);
-			sessionFactory.getCurrentSession().update(user);
+			sessionFactory.getCurrentSession().merge(user);
 			return true;
 		}
 		catch(Exception e){

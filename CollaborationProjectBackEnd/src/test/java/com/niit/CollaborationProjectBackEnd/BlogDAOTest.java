@@ -33,11 +33,10 @@ public class BlogDAOTest {
 	@Test
 	@Ignore
 	public void addBlogTest(){
-		System.out.println("In addBlogTest");
 		Blog blog=new Blog();
-		blog.setBlogName("Angular 4");
-		blog.setBlogContent("Works on Typescript");
-		blog.setLoginName("Travera");
+		blog.setBlogName("JUnit");
+		blog.setBlogContent("Junit framework is used to do junit testing");
+		blog.setLoginName("vasuagg");
 		blog.setStatus("NA");
 		blog.setCreateDate(new java.util.Date());
 		blog.setLikes(0);
@@ -48,7 +47,7 @@ public class BlogDAOTest {
 	@Test
 	@Ignore
 	public void listBlogsTest(){
-		List<Blog> blogs=blogDAO.listBlogs("Travera");
+		List<Blog> blogs=blogDAO.listBlogs("aviagg");
 		if(blogs.size()==0){
 			System.out.println("I m here");
 			assertTrue("Blogs Doesnt exist for Travera user",blogs.size()==0);
@@ -71,8 +70,9 @@ public class BlogDAOTest {
 	@Test
 	@Ignore
 	public void testUpdateBlog(){
-		Blog blog=blogDAO.getBlog(50);
-		blog.setBlogName("Introduction to Hibernate Framework");
+		Blog blog=blogDAO.getBlog(1050);
+		blog.setBlogName("Angular 1.x");
+		blog.setBlogContent("Works on Javascript");
 		
 		assertEquals("Succesfully updated the name of the blog", true,blogDAO.updateBlog(blog));
 	}
@@ -88,21 +88,22 @@ public class BlogDAOTest {
 	@Test
 	@Ignore
 	public void testApproveBlog(){
-		Blog blog=blogDAO.getBlog(50);
-		assertEquals("Blog approved succesfully", blogDAO.approveBlog(blog));
+		Blog blog=blogDAO.getBlog(200);
+		//System.out.println(blog.getBlogId()+" "+blog.getStatus());
+		assertTrue("Blog approved succesfully", blogDAO.approveBlog(blog));
 	}
 	
 	@Test
 	@Ignore
 	public void testRejectBlog(){
-		Blog blog=blogDAO.getBlog(50);
-		assertEquals("Blog rejected succesfully", blogDAO.rejectBlog(blog));
+		Blog blog=blogDAO.getBlog(200);
+		assertTrue("Blog rejected succesfully", blogDAO.rejectBlog(blog));
 	}
 	
 	@Test
 	@Ignore
 	public void testIncrementLikes(){
-		Blog blog=blogDAO.getBlog(50);
+		Blog blog=blogDAO.getBlog(100);
 		System.out.println("Blog Object : "+blog);
 		assertEquals("Likes incremented succesfully", blogDAO.incrementLikes(blog));
 	}
@@ -112,9 +113,9 @@ public class BlogDAOTest {
 	public void testAddBlogComment(){
 		System.out.println("Adding Blog Comment");
 		BlogComment blogComment=new BlogComment();
-		blogComment.setCommentText("Hibernate is used to solve the impedence mismatch b/w Relational database management system and Object Oriented Programming");
-		blogComment.setLoginname("John");
-		blogComment.setBlogId(50);
+		blogComment.setCommentText("The latest version of Junit is 4.2");
+		blogComment.setLoginname("aviagg");
+		blogComment.setBlogId(1100);
 		blogComment.setCommentDate(new Date());
 		assertEquals("Blog Comment Added", blogDAO.addBlogComment(blogComment));
 		
@@ -130,7 +131,7 @@ public class BlogDAOTest {
 	@Test
 	@Ignore
 	public void testGetBlogComment(){
-		assertNotNull("Blog Comment fetched succesfully",blogDAO.getBlogComment(100));
+		assertNotNull("Blog Comment fetched succesfully",blogDAO.getBlogComment(1050));
 	}
 	
  

@@ -31,7 +31,7 @@ public class BlogController {
 	
 	@GetMapping(value="/listBlogs")
 	public ResponseEntity<List<Blog>> getListBlogs(){
-		List<Blog> listBlogs=blogDAO.listBlogs("Travera");
+		List<Blog> listBlogs=blogDAO.listBlogs("aviagg");
 		if(listBlogs.size()>0){
 			return new ResponseEntity<List<Blog>>(listBlogs,HttpStatus.OK);
 		}
@@ -45,7 +45,7 @@ public class BlogController {
 		blog.setCreateDate(new java.util.Date());
 		blog.setLikes(0);
 		blog.setStatus("NA");
-		blog.setLoginName("Divya");
+		blog.setLoginName("vasuagg");
 		
 		if(blogDAO.addBlog(blog)){
 			return new ResponseEntity<String>("Success",HttpStatus.OK);

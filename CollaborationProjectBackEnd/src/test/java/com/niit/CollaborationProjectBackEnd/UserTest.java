@@ -34,7 +34,7 @@ public class UserTest {
 	public void registerUserTest(){
 		
 		UserDetails user=new UserDetails();
-		user.setLoginName("vasu.agg");
+		user.setLoginName("vasuagg");
 		user.setFirstName("Vasu");
 		user.setLastName("Agarwal");
 		user.setEmail("vasuagg@gmail.com");
@@ -49,8 +49,8 @@ public class UserTest {
 	@Test
 	@Ignore
 	public void testUpdateOnlineStatus(){
-		UserDetails userDetail=userDAO.getUser("avi.agg");
-		assertTrue("Problem in Updating",userDAO.updateOnlineStatus("Y", userDetail));
+		UserDetails userDetail=userDAO.getUser("aviagg");
+		assertTrue("Problem in Updating",userDAO.updateOnlineStatus("N", userDetail.getLoginName()));
 	}
 	
 	
@@ -58,8 +58,8 @@ public class UserTest {
 	@Ignore
 	public void checkLoginTest(){
 		UserDetails obj=new UserDetails();
-		obj.setLoginName("avi.agg");
-		obj.setPassword("avni1234");
+		obj.setLoginName("aviagg");
+		obj.setPassword("avni123");
 		assertTrue("Check User Fail",userDAO.checkLogin(obj));
 	}
 
@@ -74,15 +74,16 @@ public class UserTest {
 	@Test
 	@Ignore
 	public void getUserTest(){
-		assertNotNull("Succesfully fetched a single User from the table",userDAO.getUser("divya.grg"));
+		assertNotNull("Succesfully fetched a single User from the table",userDAO.getUser("divyagarg"));
 		
 	}
 	
 	@Test
 	@Ignore
 	public void testUpdateUser(){
-		UserDetails user=userDAO.getUser("divya.garg");
-		user.setEmail("divya.garg@niit.com");
+		UserDetails user=userDAO.getUser("aviagg");
+		System.out.println(user);
+		user.setEmail("divya.garg@garg.com");
 		
 		assertEquals("Succesfully updated the loginname of the User", true,userDAO.updateUser(user));
 	}
@@ -91,7 +92,7 @@ public class UserTest {
 	@Test
 	@Ignore
 	public void testDeleteUser(){
-		UserDetails User=userDAO.getUser("divya.garg");
+		UserDetails User=userDAO.getUser("divyagarg");
 		assertEquals("User Deleted Succesfully", true,userDAO.deleteUser(User));
 	}
 	
