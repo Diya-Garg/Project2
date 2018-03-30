@@ -78,7 +78,7 @@ public class UserController {
 			UserDetails user=(UserDetails)userDAO.getUser(userDetails.getLoginName());
 			userDAO.updateOnlineStatus("Y", user.getLoginName());
 			return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
-			
+		 	
 		}
 		else {
 			return new ResponseEntity<UserDetails>(userDetails,HttpStatus.INTERNAL_SERVER_ERROR);

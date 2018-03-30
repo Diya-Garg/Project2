@@ -91,5 +91,26 @@ public class BlogController {
 	}
 	
 	
+	@GetMapping(value="/approveBlog/{blogId}")
+	public ResponseEntity<String> approveBlog(@PathVariable int blogId){
+		Blog blog=blogDAO.getBlog(blogId);
+		if(blogDAO.approveBlog(blog)){
+			return new ResponseEntity<String>("Blog Approved Succesfully",HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Error in updating blog",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value="/rejectBlog/{blogId}")
+	public ResponseEntity<String> rejectBlog(@PathVariable int blogId){
+		Blog blog=blogDAO.getBlog(blogId);
+		if(blogDAO.rejectBlog(blog)){
+			return new ResponseEntity<String>("Blog Rejected Succesfully",HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("Error in rejecting blog",HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	
 }

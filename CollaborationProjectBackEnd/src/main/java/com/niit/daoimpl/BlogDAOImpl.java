@@ -54,9 +54,9 @@ public class BlogDAOImpl implements BlogDAO {
 
 	public boolean updateBlog(Blog blog) {
 		Session session=sessionFactory.getCurrentSession();
-		Blog blogObj=(Blog)session.get(Blog.class,blog.getBlogId());
+		//Blog blogObj=(Blog)session.get(Blog.class,blog.getBlogId());
 		try{
-			session.merge(blog);
+			session.update(blog);
 			return true;
 		}
 		catch(Exception e) {

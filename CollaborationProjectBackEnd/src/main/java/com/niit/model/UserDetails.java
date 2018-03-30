@@ -21,6 +21,7 @@ public class UserDetails {
 	private String role;
 	private String onlineStatus;
 	private String mobileNumber;
+	
 	public String getLoginName() {
 		return loginName;
 	}
