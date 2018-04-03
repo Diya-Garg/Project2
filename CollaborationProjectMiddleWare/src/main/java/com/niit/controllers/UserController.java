@@ -2,6 +2,8 @@ package com.niit.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,10 +75,11 @@ public class UserController {
 	
 	
 	@PostMapping(value="/login")
-	public ResponseEntity<UserDetails> checkLogin(@RequestBody UserDetails userDetails){
+	public ResponseEntity<UserDetails> checkLogin(@RequestBody UserDetails userDetails,HttpSession session){
 		if(userDAO.checkLogin(userDetails)){
 			UserDetails user=(UserDetails)userDAO.getUser(userDetails.getLoginName());
 			userDAO.updateOnlineStatus("Y", user.getLoginName());
+			session.setAttribute("userObj",user);
 			return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 		 	
 		}

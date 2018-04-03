@@ -17,14 +17,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.dao.BlogDAO;
 import com.niit.dao.ForumDAO;
+import com.niit.dao.ProfilePictureUpload;
 import com.niit.daoimpl.BlogDAOImpl;
 import com.niit.daoimpl.ForumDAOImpl;
+import com.niit.daoimpl.ProfilePictureUploadImpl;
 import com.niit.model.ApplyJob;
 import com.niit.model.Blog;
 import com.niit.model.BlogComment;
 import com.niit.model.Forum;
 import com.niit.model.ForumComment;
 import com.niit.model.Job;
+import com.niit.model.ProfilePicture;
 import com.niit.model.UserDetails;
 
 
@@ -64,7 +67,8 @@ public class DBConfig {
 		sessionFactoryBuilder.addAnnotatedClass(Job.class);
 		sessionFactoryBuilder.addAnnotatedClass(ApplyJob.class);
 		sessionFactoryBuilder.addAnnotatedClass(UserDetails.class);
-		
+		sessionFactoryBuilder.addAnnotatedClass(ProfilePicture.class);
+
 		SessionFactory sessionFactory=sessionFactoryBuilder.buildSessionFactory();
 		System.out.println("====SessionFactory Object======");
 		return sessionFactory;
@@ -87,6 +91,12 @@ public class DBConfig {
 	public ForumDAO getForumDAO(){
 		System.out.println("Creating Forum DAO");
 		return new ForumDAOImpl();
+	}
+	
+	@Bean(name="profilePictureDAO")
+	public ProfilePictureUpload getProfilePictureDAO(){
+		System.out.println("Creating Profile Picture DAO");
+		return new ProfilePictureUploadImpl();
 	}
 	
 	

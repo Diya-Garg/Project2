@@ -1,6 +1,5 @@
 myApp.controller("UserController",function($scope,$http,$location,$rootScope,$cookieStore){
 	
-	$scope.user={"loginName":"","firstName":"","lastName":"","password":"","email":"","role":"","status":""};
 	$scope.user={loginName:'',firstName:'',lastName:'',password:'',email:'',role:'',onlineStatus:'',mobileNumber:''};
 		
 		$rootScope.login=function(){
@@ -22,6 +21,12 @@ myApp.controller("UserController",function($scope,$http,$location,$rootScope,$co
 				}
 				$location.path("UserHome");
 			});
+		};
+		
+		
+		$rootScope.displayDetails=function(){
+			
+			console.log("Display Details function called : ");
 		};
 
 	$rootScope.logout=function(){

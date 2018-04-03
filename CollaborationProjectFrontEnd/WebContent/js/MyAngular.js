@@ -2,7 +2,8 @@
 */
 var myApp=angular.module("myApp",['ngRoute',,'ngCookies']);
 
-myApp.config(function($routeProvider){
+myApp.config(function($routeProvider)
+{
 	$routeProvider
 	.when("/",{
 		templateUrl:"home.html"
@@ -34,7 +35,18 @@ myApp.config(function($routeProvider){
 	.when("/about",{
 		templateUrl:"aboutus.html"
 	})
+	.when("/addBlog",{
+		templateUrl:"blog/AddBlog.html"
+	})
+	.when("/displayProfile",{
+		templateUrl:"user/UploadProfilePicture.html"
+	})
+	.when("/uploadProfilePicture",{
+		templateUrl:"user/UploadProfilePicture.html"
+	})
+
 });
+
 
 myApp.run(function($rootScope,$cookieStore)
 		{
