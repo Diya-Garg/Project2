@@ -54,7 +54,7 @@ public class ForumTest {
 	public void listForumsTest(){
 		List<Forum> forums=forumDAO.listForums("Divya Garg");
 		if(forums.size()==0){
-			assertTrue("Forums Doesnt exist for Travera user",forums.size()==0);
+			assertTrue("Forums Doesnt exist for Divya Garg user",forums.size()==0);
 		}
 		else {
 			for(Forum forum :forums){
@@ -68,14 +68,14 @@ public class ForumTest {
 	@Ignore
 	public void getForumTest(){
 		Forum forum=forumDAO.getForum(50);
-		assertEquals("Succesfully fetched a single forum from the table", "Maven",forum.getForumName());
+		assertEquals("Succesfully fetched a single forum from the table", "Introduction to JEE",forum.getForumName());
 	}
 	
 	@Test
 	@Ignore
 	public void testUpdateForum(){
 		Forum forum=forumDAO.getForum(50);
-		forum.setForumName("Introduction to JEE");
+		forum.setForumName("Maven");
 		
 		assertEquals("Succesfully updated the name of the forum", true,forumDAO.updateForum(forum));
 	}
@@ -84,7 +84,7 @@ public class ForumTest {
 	@Test
 	@Ignore
 	public void testDeleteForum(){
-		Forum forum=forumDAO.getForum(100);
+		Forum forum=forumDAO.getForum(1050);
 		assertEquals("Forum Deleted Succesfully", true,forumDAO.deleteForum(forum));
 	}
 	
@@ -93,22 +93,22 @@ public class ForumTest {
 	@Ignore
 	public void testApproveForum(){
 		Forum forum=forumDAO.getForum(50);
-		assertEquals("Forum approved succesfully", forumDAO.approveForum(forum));
+		assertEquals("Forum approved succesfully", true,forumDAO.approveForum(forum));
 	}
 	
 	@Test
-	 @Ignore
+	@Ignore
 	public void testRejectForum(){
 		Forum forum=forumDAO.getForum(50);
-		assertEquals("Forum rejected succesfully", forumDAO.rejectForum(forum));
+		assertEquals("Forum rejected succesfully", true,forumDAO.rejectForum(forum));
 	}
 
 	@Test
 	@Ignore
 	public void testAddForumComment(){
 		ForumComment comment=new ForumComment();
-		comment.setCommentText("Servlets is a helper program of Web server which is used to create dynamic web pages");
-		comment.setLoginname("Daisy");
+		comment.setCommentText("Maven is helpful in adding the required dependencies in the project");
+		comment.setLoginName("Divya Garg");
 		comment.setForumId(50);
 		comment.setCommentDate(new Date());
 		

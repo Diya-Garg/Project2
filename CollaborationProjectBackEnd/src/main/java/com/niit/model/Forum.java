@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -16,15 +17,17 @@ public class Forum {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="forumidseq")
-	int forumId;
+	private int forumId;
 	
-	String forumName;
-	String forumContent;
+	private String forumName;
+	private String forumContent;
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy")
-	Date createDate;
-	String loginName;
-	String status;
+	private Date createDate;
+	private String loginName;
+	private String status;
+	
+	
 	public int getForumId() {
 		return forumId;
 	}

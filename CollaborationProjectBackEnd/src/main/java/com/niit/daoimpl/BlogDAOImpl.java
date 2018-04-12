@@ -53,6 +53,7 @@ public class BlogDAOImpl implements BlogDAO {
 	}
 
 	public boolean updateBlog(Blog blog) {
+		System.out.println("Blog : "+blog.getBlogId()+" "+blog.getBlogName()+" "+blog.getBlogContent());
 		Session session=sessionFactory.getCurrentSession();
 		//Blog blogObj=(Blog)session.get(Blog.class,blog.getBlogId());
 		try{

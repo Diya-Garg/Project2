@@ -1,0 +1,23 @@
+<div class="container" ng-controller="ChatController">
+	<form ng-submit="addMessage()" name="chatMsg">
+	<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-9 form-group">
+								<label>Message</label>
+								<input type="text" placeholder="Enter Chat Text" ng-model="message" class="form-control">
+							</div>
+							<div class="col-sm-3 form-group">
+								<span class="count" ng-bind="max - message.length">140</span>
+								<button ng-disabled="message.length>140||message.length==0">Send</button>
+							</div>
+						</div>
+	</div>
+	</form>
+	
+	<div class="col-sm-12">
+		<p ng-repeat="message in messages">
+			<span><img src="http://localhost:4522/CollaborationProjectMiddleWare/viewProfilePicture/{{currentUser.loginName}}" width="20" height=20"/>{{message.message}}</span>
+		</p>
+	</div>
+	
+</div>

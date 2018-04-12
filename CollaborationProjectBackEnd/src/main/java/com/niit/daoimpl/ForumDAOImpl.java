@@ -19,7 +19,6 @@ public class ForumDAOImpl implements ForumDAO{
 	@Autowired
 	SessionFactory sessionFactory;
 
-	
 	public boolean addForum(Forum forum) {
 		
 		try{

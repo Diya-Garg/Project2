@@ -1,41 +1,41 @@
 <div class="container" ng-controller="UserController" data-ng-init="fetchUserDetails()">	
 	<h1 style="text-decoration:underline;">Profile Page</h1>
 	<br/>
-					
-	<br/><br/>				
+				
+				{{message}}	
+	<br/><br/>
+	<form>				
   	<table class="table table-responsive" style="margin-bottom:50px;align:center;border:1px solid black">
     <tbody>
       <tr>
-      	<td colspan="2">
-      		<center><img id="img1"  
-					src="http://localhost:4522/CollaborationProjectMiddleWare/viewProfilePicture/{{user.loginName}}"
-					style="height:120px;width:150px;border-radius: 25px;"></center>
-	
-      	</td>
-      </tr>
-      <tr>
         <td>First Name : </td>
-        <td>{{user.firstName}}</td>
+        <td><input type="text" ng-model="user.firstName"/></td>
       </tr>
         <tr>
         <td>Last Name : </td>
-        <td>{{user.lastName}}</td>
+        <td><input type="text" ng-model="user.lastName"/></td>
       </tr>
         <tr>
         <td>Mobile Number : </td>
-        <td>{{user.mobileNumber}}</td>
+        <td><input type="text" ng-model="user.mobileNumber"/></td>
       </tr>
         <tr>
         <td>Email : </td>
-        <td>{{user.email}}</td>
+        <td><input type="text" ng-model="user.email"/></td>
       </tr>
         <tr>
         <td>LoginName : </td>
-        <td>{{user.loginName}}</td>
+        <td><input type="text" ng-model="user.loginName" disabled="disabled"/></td>
       </tr>
-        
+        <tr>
+        	<td></td>
+        	<td>
+        		<button type="submit" class="btn btn-info" ng-click="updateProfile()">Update Profile</button>
+        	</td>
+        </tr>
     </tbody>
     </table>
+    </form>
 </div>
 	
 	

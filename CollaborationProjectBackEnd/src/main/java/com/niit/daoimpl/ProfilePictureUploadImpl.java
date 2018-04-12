@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.dao.ProfilePictureUpload;
 import com.niit.model.ProfilePicture;
+import com.niit.model.UserDetails;
 
 @Repository("profilePictureDAO")
 @Transactional
@@ -18,8 +19,14 @@ public class ProfilePictureUploadImpl implements ProfilePictureUpload{
 
 	public void save(ProfilePicture profilePicture) {
 		Session session=sessionFactory.getCurrentSession();
+		Object obj=session.get(ProfilePicture.class,profilePicture.getLoginName());
+		System.out.println(obj);
+		if(obj==null){
 		session.save(profilePicture);
-		
+		}
+		else {
+			session.merge(profilePicture);
+		}
 		
 	}
 

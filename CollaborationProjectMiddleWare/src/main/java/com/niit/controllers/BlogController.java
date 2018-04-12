@@ -1,7 +1,10 @@
 package com.niit.controllers;
 
+
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.dao.BlogDAO;
 import com.niit.model.Blog;
+import com.niit.model.UserDetails;
 
 
 @RestController
@@ -24,14 +28,19 @@ public class BlogController {
 	@Autowired
 	BlogDAO blogDAO;
 	
+	
 	@GetMapping(value="/demo")
 	public ResponseEntity<String> demoPurpose(){
 		return new ResponseEntity<String>("Demo Data",HttpStatus.OK);
 	}
 	
+	
 	@GetMapping(value="/listBlogs")
-	public ResponseEntity<List<Blog>> getListBlogs(){
-		List<Blog> listBlogs=blogDAO.listBlogs("aviagg");
+	public ResponseEntity<List<Blog>> getListBlogs(HttpSession session){
+		
+		UserDetails userDetails=(UserDetails)session.getAttribute("userObj");
+		
+		List<Blog> listBlogs=blogDAO.listBlogs(userDetails.getLoginName());
 		if(listBlogs.size()>0){
 			return new ResponseEntity<List<Blog>>(listBlogs,HttpStatus.OK);
 		}
@@ -40,35 +49,46 @@ public class BlogController {
 		}
 	}
 	
+	
 	@PostMapping(value="/addBlog")
-	public ResponseEntity<String> addBlog(@RequestBody Blog blog){
+	public ResponseEntity<String> addBlog(@RequestBody Blog blog,HttpSession session){
 		blog.setCreateDate(new java.util.Date());
 		blog.setLikes(0);
 		blog.setStatus("NA");
-		blog.setLoginName("vasuagg");
+		
+		UserDetails userDetails=(UserDetails)session.getAttribute("userObj");
+		System.out.println("User Details = "+userDetails.getLoginName());
+		blog.setLoginName(userDetails.getLoginName());
 		
 		if(blogDAO.addBlog(blog)){
-			return new ResponseEntity<String>("Success",HttpStatus.OK);
+			return new ResponseEntity<String>("Blog Added Succesfully",HttpStatus.OK);
 		}
 		else{
 			return new ResponseEntity<String>("Failure",HttpStatus.NOT_FOUND);
 		}
 	}
 	
+	
 	@GetMapping(value="/getBlog/{blogId}")
 	public ResponseEntity<Blog> getBlog(@PathVariable int blogId){
 		
 		Blog blog=blogDAO.getBlog(blogId);
 		if(blog==null){
+			System.out.println("Blog Not Found");
 			return new ResponseEntity<Blog>(blog,HttpStatus.NOT_FOUND);
 		}
 		else{
+			System.out.println("Blog Found");
 			return new ResponseEntity<Blog>(blog,HttpStatus.OK);
 		}
 	}
 	
+	
 	@GetMapping(value="/deleteBlog/{blogId}")
 	public ResponseEntity<String> deleteBlog(@PathVariable int blogId){
+		
+		
+		System.out.println("Delete Blog in Rest Controller : "+blogId);
 		Blog blog=blogDAO.getBlog(blogId);
 		
 		if(blogDAO.deleteBlog(blog)){
@@ -79,9 +99,10 @@ public class BlogController {
 		}
 	}
 	
-	@PostMapping(value="/updateBlog/{blogId}")
+	
+	@PostMapping(value="/updateBlog")
 	public ResponseEntity<String> updateBlog(@RequestBody Blog blog){
-		
+		System.out.println(blog);
 		if(blogDAO.updateBlog(blog)){
 			return new ResponseEntity<String>("Blog Updated Succesfully",HttpStatus.OK);
 		}
@@ -112,5 +133,10 @@ public class BlogController {
 			return new ResponseEntity<String>("Error in rejecting blog",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 }
+
+
+
+
+
+ 

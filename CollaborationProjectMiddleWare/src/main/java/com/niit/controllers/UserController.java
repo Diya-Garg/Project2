@@ -80,6 +80,7 @@ public class UserController {
 			UserDetails user=(UserDetails)userDAO.getUser(userDetails.getLoginName());
 			userDAO.updateOnlineStatus("Y", user.getLoginName());
 			session.setAttribute("userObj",user);
+			System.out.println("Attribute Added in Session");
 			return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 		 	
 		}

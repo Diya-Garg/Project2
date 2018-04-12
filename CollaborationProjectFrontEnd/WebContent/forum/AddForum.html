@@ -1,26 +1,26 @@
-<div class="container"  ng-controller="BlogController" class="table-responsive">
+<div class="container"  ng-controller="ForumController" class="table-responsive">
 
 <h3>{{message}}</h3>
 
 <br/><br/>
 
- <h2>Add Blog</h2>
+ <h2>Add Forum</h2>
   <form>
     <div class="form-group">
-      <label class="control-label col-sm-2" for="blogName">Blog Name:</label>
+      <label class="control-label col-sm-2" for="forumName">Forum Name:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="blogName" placeholder="Enter Blog Name " name="blogName" ng-model="blog.blogName">
+        <input type="text" class="form-control" id="forumName" placeholder="Enter Forum Name " name="forumName" ng-model="forum.forumName">
       </div>
     </div> 
     <div class="form-group">
-      <label class="control-label col-sm-2" for="blogContent">Blog Content:</label>
+      <label class="control-label col-sm-2" for="forumContent">Forum Content:</label>
       <div class="col-sm-10">
       	<img src="images/Bold.png" style="width:20px;height:15px"/>
       	<img src="images/Italic.ico" style="width:20px;height:15px"/>
       	<img src="images/underline.png" style="width:20px;height:15px"/>
       	<br/>          
-        <textarea class="form-control" id="blogContent" placeholder="Enter Blog Content"
-         name="blogContent" rows="10" ng-model="blog.blogContent">
+        <textarea class="form-control" id="blogContent" placeholder="Enter Forum Content"
+         name="forumContent" rows="10" ng-model="forum.forumContent">
         </textarea>
       </div>
       
@@ -28,7 +28,7 @@
     
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <input type="submit" value="Add Blog" ng-click="addBlog()">
+        <input type="submit" value="Add Forum" ng-click="addForum()">
       </div>
     </div>
   </form>

@@ -1,0 +1,34 @@
+<div class="container"  ng-controller="BlogController" class="table-responsive" data-ng-init="fetchAllBlogsAgain()">
+
+
+
+<br/>
+
+<h1>List of All Blogs</h1><br/>
+
+
+
+<div class="list-group" >
+    <div href="#" class="list-group-item" ng-repeat="blog in allBlogs">
+      <h3 class="list-group-item-heading" style="color:#0000A0" >
+     	{{blog.blogName}}
+      </h3>
+      <p class="list-group-item-text">
+      	{{blog.blogContent}}
+      	<img src="images/Update.png" style="height:40px;width:40px;padding-right:20px" ng-click="UpdateBlog(blog.blogId)"/>
+      	<img src="images/Delete.png" style="height:40px;width:40px" ng-click="DeleteBlog(blog.blogId)"/> 
+      	
+      	<br/>
+      	<span style="color:#0000FF">Created On :  </span>{{blog.createDate}} <br/>
+      	{{blog.likes}} <span style="color:#0000FF">likes</span><br/>
+      	
+      </p>
+      
+      
+    </div>
+  </div>
+</div>
+
+
+
+

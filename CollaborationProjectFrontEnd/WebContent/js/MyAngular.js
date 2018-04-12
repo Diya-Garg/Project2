@@ -38,13 +38,33 @@ myApp.config(function($routeProvider)
 	.when("/addBlog",{
 		templateUrl:"blog/AddBlog.html"
 	})
-	.when("/displayProfile",{
-		templateUrl:"user/UploadProfilePicture.html"
+	.when("/viewProfile",{
+		templateUrl:"user/ViewProfile.html"
+	})
+	.when("/updateProfile",{
+		templateUrl:"user/UploadProfileForm.html"
 	})
 	.when("/uploadProfilePicture",{
 		templateUrl:"user/UploadProfilePicture.html"
 	})
-
+	.when("/viewAllBlogs",{
+		templateUrl:"blog/ViewAllBlogs.html"
+	})
+	.when("/updateBlogForm",{
+		templateUrl:"blog/UpdateBlogForm.html"
+	})
+	.when("/addForum",{
+		templateUrl:"forum/AddForum.html"
+	})
+	.when("/viewAllForums",{
+		templateUrl:"forum/ViewAllForums.html"
+	})
+	.when("/updateForumForm",{
+		templateUrl:"forum/UpdateForumForm.html"
+	})
+	.when("/startChat",{
+		templateUrl:"chat/Chat.html"
+	})
 });
 
 
@@ -56,6 +76,8 @@ myApp.run(function($rootScope,$cookieStore)
 				if($rootScope.currentUser==undefined)
 				{
 				$rootScope.currentUser=$cookieStore.get('userDetails');
+				$rootScope.currentBlog=$cookieStore.get('blogDetails');
+				$rootScope.currentForum=$cookieStore.get('forumDetails');
 				}
 				else
 				{

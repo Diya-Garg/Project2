@@ -70,6 +70,14 @@ public class UserDetails {
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
+	@Override
+	public String toString() {
+		return "UserDetails [loginName=" + loginName + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", password="
+				+ password + ", email=" + email + ", role=" + role
+				+ ", onlineStatus=" + onlineStatus + ", mobileNumber="
+				+ mobileNumber + "]";
+	}
 	
 	
 	

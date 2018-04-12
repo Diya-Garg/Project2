@@ -28,13 +28,14 @@ public class ProfilePictureController {
 	
 	@RequestMapping(value="/doUpload",method=RequestMethod.POST)
 	public ResponseEntity<?> uploadPicture(@RequestParam(value="file")CommonsMultipartFile fileUpload,HttpSession session){
-		
+		System.out.println("I m in upload Picture method..");
 		UserDetails userDetails=(UserDetails)session.getAttribute("userObj");
 		
 		if(userDetails==null){
 			return new ResponseEntity<Void>(HttpStatus.UNAUTHORIZED);
 		}
 		else {
+			System.out.println("Uploading Profile Picture");
 			ProfilePicture profile=new ProfilePicture();
 			profile.setLoginName(userDetails.getLoginName());
 			profile.setImage(fileUpload.getBytes());

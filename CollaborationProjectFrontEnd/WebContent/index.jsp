@@ -2,6 +2,8 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>LetsTalk</title>
+		
+		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   		<script src="js/jquery.min.js"></script>
   		<script src="js/bootstrap.min.js"></script>
@@ -11,8 +13,13 @@
 		<script src="js/MyAngular.js"></script>
   		<script src="user/UserController.js"></script>
   		<script src="blog/BlogController.js"></script>
+  		<script src="forum/ForumController.js"></script>
+  		<script src="chat/ChatController.js"></script>
+  		<script src="chat/ChatService.js"></script>
   		<link rel="stylesheet" href="css/app.css"/>
-	
+		<script src="js/lodash.js"></script>
+		<script src="js/stomp.js"></script>
+		<script src="js/sockjs.js"></script>
 	</head>
 	<body ng-app="myApp">
 	<nav class="navbar navbar-inverse" style="background-color:#34495E">
@@ -52,20 +59,38 @@
         				<span class="caret"></span></p>
         				<ul class="dropdown-menu">
           					<li><a href="#!addBlog">Add Blog</a></li>
-          					<li><a href="#">View All Blogs</a></li>
-          				</ul>
+          					<li><a href="#!viewAllBlogs">View All Blogs</a></li>
+         		</ul>
       				</li>
+      				<li ng-show="currentUser.role=='Role_User'" class="dropdown" style="padding-right:20px;padding-left:10px ">
+						<p class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:white;padding-top:10px">Forum
+        				<span class="caret"></span></p>
+        				<ul class="dropdown-menu">
+          					<li><a href="#!addForum">Add Forum</a></li>
+          					<li><a href="#!viewAllForums">View All Forums</a></li>
+         		</ul>
+         		
+         		
       				<li ng-show="currentUser.role=='Role_User'" class="dropdown">
 						<p class="dropdown-toggle" data-toggle="dropdown" href="#" style="color:white;padding-top:10px">Profile
         				<span class="caret"></span></p>
         				<ul class="dropdown-menu">
         				
-          					<li><a href="#!displayProfile">View Profile</a></li>
-          					<li><a href="#">Update Profile</a></li>
+          					<li><a href="#!viewProfile">View Profile</a></li>
+          					<li><a href="#!updateProfile">Update Profile</a></li>
           					<li><a href="#!uploadProfilePicture">Upload Profile Picture</a></li>
           				</ul>
       				</li>
+      				
+      				
+      					<li ng-show="currentUser.role=='Role_User'"><a href="#!startChat" style="color:white">Chat</a></li>
+					
+      				
 				</ul>
+				
+			
+				
+				
 				<ul class="nav navbar-nav navbar-right" ng-hide="currentUser==undefined" style="padding-top:20px">
 					<li style="color:white;padding-right:20px;font-size:20px">Welcome {{currentUser.firstName}} {{currentUser.lastName}}</li>
 					<li>

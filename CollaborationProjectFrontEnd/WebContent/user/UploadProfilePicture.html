@@ -1,10 +1,16 @@
-<div class="container" ng-controller="UserController">
-	<h2>Login</h2>
-	<img src="images/loginbanner.jpg" style="height:400px;width:100%"/><br/><br/>
-	<form enctype="multipart/form-data" method="post" action="http://localhost:4522/CollaborationProjectMiddleWare/doUpload">
+<div class="container" ng-controller="UserController" data-ng-init="fetchUserDetails()">
+	<h2>Upload Profile Picture</h2>
+	
+	
+		<img id="img1"  
+					src="http://localhost:4522/CollaborationProjectMiddleWare/viewProfilePicture/{{currentUser.loginName}}"
+					onerror="if (this.src != 'images/profilepicture.png') this.src = 'images/profilepicture.png';"
+					style="height:120px;width:150px" onshow="checkSRC"></li> <br/><br/>
+				
+	<form enctype="multipart/form-data" method="post" 
+	action="http://localhost:4522/CollaborationProjectMiddleWare/doUpload" style="margin-bottom:150px">
 		<div class="form-group input-group">	
-			 <label>Profile Picture</label>
-      		<input  type="file" class="form-control" name="file" placeholder="Upload Picture">
+			<input  type="file" class="form-control" name="file" placeholder="Upload Picture">
 		</div>
 		
  		<br>

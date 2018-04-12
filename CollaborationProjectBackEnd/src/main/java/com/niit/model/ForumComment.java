@@ -18,7 +18,7 @@ public class ForumComment {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="forumcommentseq")
 	private int commentId;
 	private String commentText;
-	private String loginname;
+	private String loginName;
 	private int forumId;
 	private Date commentDate;
 	
@@ -34,11 +34,11 @@ public class ForumComment {
 	public void setCommentText(String commentText) {
 		this.commentText = commentText;
 	}
-	public String getLoginname() {
-		return loginname;
+	public String getLoginName() {
+		return loginName;
 	}
-	public void setLoginname(String loginname) {
-		this.loginname = loginname;
+	public void setLoginName(String loginname) {
+		this.loginName = loginname;
 	}
 	public int getForumId() {
 		return forumId;

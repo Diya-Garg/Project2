@@ -1,0 +1,39 @@
+<div class="container"  ng-controller="ForumController" class="table-responsive">
+
+<br/><br/>
+
+
+
+ <h2>Update forum</h2>
+  <form>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="forumName">Forum Name:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="forumName"  name="forumName" ng-model="currentForum.forumName">
+      </div>
+    </div> 
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="forumContent">forum Content:</label>
+      <div class="col-sm-10">
+      	<textarea class="form-control" id="forumContent"
+         name="forumContent" rows="10" ng-model="currentForum.forumContent">
+        </textarea>
+      </div>
+      
+    </div>
+    
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <input type="submit" value="Update forum" ng-click="editForum()">
+      </div>
+    </div>
+  </form>
+  
+  <br/><br/>
+  
+  
+  
+  
+</div>
+
+
