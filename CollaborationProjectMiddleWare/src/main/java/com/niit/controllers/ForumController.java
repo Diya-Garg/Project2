@@ -50,20 +50,49 @@ public class ForumController {
 		}
 	}
 	
+	
+	
 	@GetMapping(value="/listForums")
 	public ResponseEntity<List<Forum>> getListForums(HttpSession session){
-		
+	
+		List<Forum> listForums=null;
 		UserDetails userDetails=(UserDetails)session.getAttribute("userObj");
-		
-		List<Forum> listForums=forumDAO.listForums(userDetails.getLoginName());
+	
+		if(userDetails!=null)
+		{
+		listForums=forumDAO.listForums(userDetails.getLoginName(),userDetails.getRole());
 		if(listForums.size()>0){
 			return new ResponseEntity<List<Forum>>(listForums,HttpStatus.OK);
 		}
 		else {
 			return new ResponseEntity<List<Forum>>(listForums,HttpStatus.NOT_FOUND);
 		}
+		}else {
+			listForums=forumDAO.listForums("","Role_Guest");
+			return new ResponseEntity<List<Forum>>(listForums,HttpStatus.OK);
+		
+		}
 	}
 	
+	/*	List<Blog> listBlogs=null;
+		UserDetails userDetails=(UserDetails)session.getAttribute("userObj");
+		
+		if(userDetails!=null){
+			listBlogs=blogDAO.listBlogs(userDetails.getLoginName(),userDetails.getRole());
+			if(listBlogs.size()>0){
+				return new ResponseEntity<List<Blog>>(listBlogs,HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<List<Blog>>(listBlogs,HttpStatus.NOT_FOUND);
+			}
+		}
+		else {
+			listBlogs=blogDAO.listBlogs("","Role_Guest");
+			return new ResponseEntity<List<Blog>>(listBlogs,HttpStatus.OK);
+		}
+		
+		
+	*/
 	
 	@GetMapping(value="/getForum/{forumId}")
 	public ResponseEntity<Forum> getBlog(@PathVariable int forumId){

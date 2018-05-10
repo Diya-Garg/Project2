@@ -77,14 +77,17 @@ public class UserController {
 	@PostMapping(value="/login")
 	public ResponseEntity<UserDetails> checkLogin(@RequestBody UserDetails userDetails,HttpSession session){
 		if(userDAO.checkLogin(userDetails)){
+			
+			System.out.println("I m valid user");
 			UserDetails user=(UserDetails)userDAO.getUser(userDetails.getLoginName());
-			userDAO.updateOnlineStatus("Y", user.getLoginName());
+			userDAO.updateOnlineStatus("online", user.getLoginName());
 			session.setAttribute("userObj",user);
 			System.out.println("Attribute Added in Session");
 			return new ResponseEntity<UserDetails>(user,HttpStatus.OK);
 		 	
 		}
 		else {
+			System.out.println("Invalid user");
 			return new ResponseEntity<UserDetails>(userDetails,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -92,7 +95,7 @@ public class UserController {
 	
 	@PostMapping(value="/register")
 	public ResponseEntity<String> registerUser(@RequestBody UserDetails userDetails){
-		userDetails.setOnlineStatus("N");
+		userDetails.setOnlineStatus("Offline");
 		userDetails.setRole("Role_User");
 		
 		if(userDAO.registerUser(userDetails)){
@@ -107,7 +110,7 @@ public class UserController {
 	@GetMapping(value="getUser/{loginName}")
 	public ResponseEntity<UserDetails> getUserByLoginName(@PathVariable String loginName){
 		
-		System.out.println(loginName);
+		System.out.println("In get user function"+loginName);
 		UserDetails userDetails=userDAO.getUser(loginName);
 		if(userDetails!=null){
 			return new ResponseEntity<UserDetails>(userDetails,HttpStatus.OK);
@@ -115,6 +118,11 @@ public class UserController {
 		else {
 			return new ResponseEntity<UserDetails>(userDetails,HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@GetMapping(value="checkStatus")
+	public ResponseEntity<String> checkStatus(){
+		return  new ResponseEntity<String>("Checking Status",HttpStatus.OK);
 	}
 	
 }
