@@ -7,6 +7,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class FriendDAOImpl implements FriendDAO {
 			System.out.println("In Delete Friend Request function...");
 			Session session=sessionFactory.getCurrentSession();
 			Friend friend=(Friend)session.get(Friend.class, friendId);
-			if(friend.getStatus()=="Pending"){
+			if(friend.getStatus().equals("Pending")){
 				session.delete(friend);
 				System.out.println("Friend Request Deleted...");
 			}
@@ -58,24 +59,21 @@ public class FriendDAOImpl implements FriendDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<UserDetails> showSuggestedFriend(String loginname) {
-		List<UserDetails> users=new ArrayList<UserDetails>();
-		Session session = sessionFactory.openSession();
-				Query query = session
-						.createSQLQuery("select * from userdetails where loginname not in (select friendloginname from friend)");
-				List<Object[]> rows = query.list();
-				for(Object[] row : rows){
-					UserDetails user = new UserDetails();
-					user.setLoginName((String)row[0]);
-					user.setEmail((String)row[1]);
-					user.setFirstName((String)row[2]);
-					user.setLastName((String)row[3]);
-					user.setMobileNumber((String)row[4]);
-					user.setOnlineStatus((String)row[5]);
-					user.setPassword((String)row[6]);
-					user.setRole((String)row[7]);
-					users.add(user);
-				}
-				return users;
+		String sql="select loginname from userdetails where loginname not in (select friendloginname from Friend where loginname='"+loginname+"') and loginname!='"+loginname+"' and role='Role_User'";
+		System.out.println(sql);
+		Session session=sessionFactory.openSession();
+		SQLQuery query=session.createSQLQuery(sql);
+		List<Object> suggestFriendname=(List<Object>)query.list();
+		List<UserDetails> suggestFriendList=new ArrayList<UserDetails>();
+		int i=0;
+		while(i<suggestFriendname.size())
+		{
+			UserDetails userDetail=(UserDetails)session.get(UserDetails.class, (String)suggestFriendname.get(i));
+			suggestFriendList.add(userDetail);
+			i++;
+		}
+		System.out.println("Suggested Friends : "+suggestFriendList);
+		return suggestFriendList;
 	}
 
 	public List<Friend> showAllFriends(String loginname) {

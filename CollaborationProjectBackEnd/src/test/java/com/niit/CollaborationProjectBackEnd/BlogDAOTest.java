@@ -47,7 +47,7 @@ public class BlogDAOTest {
 	@Test
 	@Ignore
 	public void listBlogsTest(){
-		List<Blog> blogs=blogDAO.listBlogs("aviagg");
+		List<Blog> blogs=blogDAO.listBlogs("aviagg","Role_User");
 		if(blogs.size()==0){
 			System.out.println("I m here");
 			assertTrue("Blogs Doesnt exist for Travera user",blogs.size()==0);
@@ -115,7 +115,7 @@ public class BlogDAOTest {
 		BlogComment blogComment=new BlogComment();
 		blogComment.setCommentText("The latest version of Junit is 4.2");
 		blogComment.setLoginname("aviagg");
-		blogComment.setBlogId(1100);
+		blogComment.setBlogId(50);
 		blogComment.setCommentDate(new Date());
 		assertEquals("Blog Comment Added", blogDAO.addBlogComment(blogComment));
 		

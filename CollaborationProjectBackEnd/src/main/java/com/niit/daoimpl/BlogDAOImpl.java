@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.dao.BlogDAO;
 import com.niit.model.Blog;
 import com.niit.model.BlogComment;
+import com.niit.model.UserDetails;
 
 
 @Repository("blogDAO")
@@ -28,6 +29,7 @@ public class BlogDAOImpl implements BlogDAO {
 	public boolean addBlog(Blog blog) {
 		Session session=sessionFactory.getCurrentSession();
 		try{
+			
 			session.save(blog);
 			return true;
 		}
@@ -74,7 +76,7 @@ public class BlogDAOImpl implements BlogDAO {
 
 	public boolean approveBlog(Blog blog) {
 		try{
-			blog.setStatus("A");
+			blog.setStatus("Approved");
 			sessionFactory.getCurrentSession().update(blog);
 			System.out.println("I m here 1 ");
 			return true;
@@ -88,7 +90,7 @@ public class BlogDAOImpl implements BlogDAO {
 
 	public boolean rejectBlog(Blog blog) {
 		try{
-			blog.setStatus("NA");
+			blog.setStatus("Rejected");
 			sessionFactory.getCurrentSession().update(blog);
 			return true;
 		}
@@ -98,10 +100,20 @@ public class BlogDAOImpl implements BlogDAO {
 		}
 	}
 
-	public List<Blog> listBlogs(String userName) {
+	public List<Blog> listBlogs(String userName,String role) {
+		Query query=null;
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Blog where loginname=:a");
+		if(role.equals("Role_Admin")){
+			query=session.createQuery("from Blog");	
+		}
+		else if(role.equals("Role_Guest")){
+			query=session.createQuery("from Blog where status='Approved'");	
+		}
+		else { 
+		query=session.createQuery("from Blog where loginname=:a");
 		query.setParameter("a",userName);
+		}
+		
 		return query.list();
 		
 	}
@@ -160,6 +172,18 @@ public class BlogDAOImpl implements BlogDAO {
 		Session session=sessionFactory.getCurrentSession();
 		Query query=session.createQuery("from com.niit.model.BlogComment where blogId=:cid");
 		query.setParameter("cid",blogId);
+		return query.list();
+	}
+
+	public List<Blog> listAllApprovedBlogs() {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from Blog where status='Approved'");
+		return query.list();
+	}
+
+	public List<Blog> listPendingBlogs() {
+		Session session=sessionFactory.getCurrentSession();
+		Query query=session.createQuery("from Blog where status='Pending'");
 		return query.list();
 	}
 

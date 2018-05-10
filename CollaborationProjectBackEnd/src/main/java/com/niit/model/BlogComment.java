@@ -3,9 +3,12 @@ package com.niit.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,8 +22,9 @@ public class BlogComment {
 	private int commentId;
 	private String commentText;
 	private String loginname;
-	private int blogId;
 	private Date commentDate;
+	
+	private int blogId;
 	
 	public int getCommentId() {
 		return commentId;
@@ -40,6 +44,9 @@ public class BlogComment {
 	public void setLoginname(String loginname) {
 		this.loginname = loginname;
 	}
+	
+	
+	
 	public int getBlogId() {
 		return blogId;
 	}

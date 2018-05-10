@@ -52,7 +52,7 @@ public class ForumTest {
 	@Test
 	@Ignore
 	public void listForumsTest(){
-		List<Forum> forums=forumDAO.listForums("Divya Garg");
+		List<Forum> forums=forumDAO.listForums("Divya Garg","");
 		if(forums.size()==0){
 			assertTrue("Forums Doesnt exist for Divya Garg user",forums.size()==0);
 		}

@@ -2,13 +2,16 @@ package com.niit.daoimpl;
 
 
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.niit.dao.ForumDAO;
+import com.niit.model.Blog;
 import com.niit.model.Forum;
 import com.niit.model.ForumComment;
 
@@ -76,14 +79,25 @@ public class ForumDAOImpl implements ForumDAO{
 		return false;
 	}
 
-	public List<Forum> listForums(String userName) {
-		Session session=sessionFactory.getCurrentSession();
-		Query query=session.createQuery("from com.niit.model.Forum where loginName=:uname");
-		query.setParameter("uname",userName);
-		List<Forum> list=query.list();
-		System.out.println("List = "+list);
-		return list;
+
+	public List<Forum> listForums(String userName,String role) {
+		Query query=null;
+		Session session=sessionFactory.openSession();
+		if(role.equals("Role_Admin")){
+			query=session.createQuery("from Forum");	
+		}
+		else if(role.equals("Role_Guest")){
+			query=session.createQuery("from Forum where status='Approved'");	
+		}
+		else { 
+		query=session.createQuery("from Forum where loginname=:a");
+		query.setParameter("a",userName);
+		}
+		
+		return query.list();
+		
 	}
+	
 
 	public boolean addForumComment(ForumComment forumComment) {
 		Session session=sessionFactory.getCurrentSession();

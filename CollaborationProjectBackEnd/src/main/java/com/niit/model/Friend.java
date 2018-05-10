@@ -44,6 +44,12 @@ public class Friend {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	@Override
+	public String toString() {
+		return "Friend [friendId=" + friendId + ", loginName=" + loginName
+				+ ", friendLoginName=" + friendLoginName + ", status=" + status
+				+ "]";
+	}
 	
 	
 	

@@ -19,7 +19,7 @@ public class ApplyJob {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="jobapplicationidseq")
 	private int applicationId;
 	private int jobId;
-	private String loginname;
+	private String loginName;
 	private Date applyDate;
 	
 	public int getApplicationId() {
@@ -34,11 +34,11 @@ public class ApplyJob {
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public String getLoginname() {
-		return loginname;
+	public String getLoginName() {
+		return loginName;
 	}
-	public void setLoginname(String loginname) {
-		this.loginname = loginname;
+	public void setLoginname(String loginName) {
+		this.loginName = loginName;
 	}
 	public Date getApplyDate() {
 		return applyDate;
