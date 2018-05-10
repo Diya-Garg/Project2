@@ -32,6 +32,24 @@ myApp.controller("UserController",function($scope,$http,$location,$rootScope,$co
 			});
 		};
 		
+		
+		$scope.Register=function()
+		{
+			console.log("Enter into Register Method");
+			$http.post('http://localhost:4522/CollaborationProjectMiddleWare/register',$scope.user)
+			.then(listOfUsers(),function(response)
+	     	{
+				console.log('Status Text:'+response.statusText);
+				$scope.user={loginName:'',firstName:'',lastName:'',password:'',email:'',role:'',onlineStatus:'',mobileNumber:''};
+				$window.location.reload();
+
+				alert("User Registered sucessfully");
+
+				$location.path("register");
+				
+		 });
+		};
+		
 		function listOfUsers(){
 			console.log('In listOfUsers function');
 			$http.get("http://localhost:4522/CollaborationProjectMiddleWare/getListOfUsers")
@@ -64,6 +82,20 @@ myApp.controller("UserController",function($scope,$http,$location,$rootScope,$co
 				$location.path("UserHome");
 			});
 		};
+		
+	/*	$scope.Register=function()
+		{
+			console.log("Enter into Register Method");
+			$http.post('http://localhost:4522/CollaborationProjectMiddleWare/register',$scope.user)
+			.then(listOfUsers(),function(response)
+	     	{
+				console.log('Status Text:'+response.statusText);
+				alert("User Registered sucessfully");
+			
+		 });
+		};*/
+		
+		
 		
 		
 		

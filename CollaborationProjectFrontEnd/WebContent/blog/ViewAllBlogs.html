@@ -13,16 +13,24 @@
       <h3 class="list-group-item-heading" style="color:#0000A0" >
      	{{blog.blogName}}
       </h3>
-      <p class="list-group-item-text">
+      <h4 class="list-group-item-text">
       	{{blog.blogContent}}
-      	<img src="images/Update.png" style="height:40px;width:40px;padding-right:20px" ng-click="UpdateBlog(blog.blogId)"/>
-      	<img src="images/Delete.png" style="height:40px;width:40px" ng-click="DeleteBlog(blog.blogId)"/> 
+      	<img src="images/Update.png" style="height:40px;width:40px;padding-right:20px" ng-click="UpdateBlog(blog.blogId)" ng-hide="{{currentUser.role=='Role_Admin'}}"/>
+      	<img src="images/Delete.png" style="height:40px;width:40px" ng-click="DeleteBlog(blog.blogId)" ng-hide="{{currentUser.role=='Role_Admin'}}"/> 
       	
       	<br/>
       	<span style="color:#0000FF">Created On :  </span>{{blog.createDate}} <br/>
-      	{{blog.likes}} <span style="color:#0000FF">likes</span><br/>
+      	<span style="color:#0000FF">likes : </span> {{blog.likes}} <br/>
       	
-      </p>
+      </h4>
+      
+      <h4>
+      	<span style="color:#0000FF">Status : </span> {{blog.status}} <br/>
+      	</h4>
+      
+      	<h4>
+      		<input type="button" ng-click="viewAllBlogComments(blog.blogId)" class="btn btn-primary">View Comments</button>
+      	</h4>
       
       
     </div>

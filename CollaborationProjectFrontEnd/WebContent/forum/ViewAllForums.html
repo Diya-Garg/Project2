@@ -15,8 +15,10 @@
       </h3>
       <p class="list-group-item-text">
       	{{forum.forumContent}}
-      	<img src="images/Update.png" style="height:40px;width:40px;padding-right:20px" ng-click="UpdateForum(forum.forumId)"/>
-      	<img src="images/Delete.png" style="height:40px;width:40px" ng-click="DeleteForum(forum.forumId)"/> 
+      	<img src="images/Update.png" style="height:40px;width:40px;padding-right:20px" ng-click="UpdateForum(forum.forumId)" ng-hide="{{currentUser.role=='Role_Admin'}}"/>
+      	<img src="images/Delete.png" style="height:40px;width:40px" ng-click="DeleteForum(forum.forumId)" ng-hide="{{currentUser.role=='Role_Admin'}}/> 
+      
+      	 
       	
       	<br/>
       	<span style="color:#0000FF">Created On : </span>{{forum.createDate}} <br/>

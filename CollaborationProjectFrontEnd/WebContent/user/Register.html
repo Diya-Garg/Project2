@@ -1,21 +1,33 @@
-<div class="container">
+<div class="container" ng-controller="UserController">
 	<h2>Create an account on Letstalk . It takes only 1 minute and it is free</h2>
 	<img src="images/register.jpg" style="height:100px;width:100"/><br/><br/>
 	
 	<form>
 		<div class="form-group">	
 			<label for="displayName">Display name:</label>
-			<input type="text" class="form-control" id="display name" placeholder="J. Jack" name="displayName">
+			<input type="text" class="form-control" id="display name" placeholder="Login Name" name="loginName" ng-model="user.loginName">
 		</div>
-		<div class="form-group">	o 
+		<div class="form-group">	
+			<label for="firstName">First name:</label>
+			<input type="text" class="form-control" id="first name" placeholder="First Name" name="firstName" ng-model="user.firstName">
+		</div>
+		<div class="form-group">	
+			<label for="lastName">Last name:</label>
+			<input type="text" class="form-control" id="last name" placeholder="Last Name" name="lastName" ng-model="user.lastName">
+		</div>
+		<div class="form-group">	
+			<label for="mobileNumber">Mobile Number:</label>
+			<input type="text" class="form-control" id="mobileNumber" placeholder="Mobile Number" name="mobileNumber" ng-model="user.mobileNumber">
+		</div>
+		<div class="form-group">	
 			<label for="email">Email:</label>
-			<input type="email" class="form-control" id="email" placeholder="you@xyz.com" name="email">
+			<input type="email" class="form-control" id="email" placeholder="Email" name="email" ng-model="user.email">
 		</div>
 		<div class="form-group">	
 			<label for="password">Password:</label>
-			<input type="password" class="form-control" id="password" placeholder="*****" name="password">
+			<input type="password" class="form-control" id="password" placeholder="*****" name="password" ng-model="user.password">
 		</div>
-		<button type="submit" class="btn btn-default">Sign Up</button>
+		<input type="submit" class="btn btn-default" ng-click="Register()" value="Sign Up"/>
 		
 		<br/>
 		<h6>By registering , you agree to the <a href="#">privacy policy</a> and <a href="#">Terms & Conditions</a></h6>
@@ -23,3 +35,5 @@
 </div>
 
 <br/><br/><br/><br/>
+
+	

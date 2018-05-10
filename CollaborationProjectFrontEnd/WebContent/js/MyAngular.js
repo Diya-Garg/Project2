@@ -50,6 +50,7 @@ myApp.config(function($routeProvider)
 	.when("/viewAllBlogs",{
 		templateUrl:"blog/ViewAllBlogs.html"
 	})
+	
 	.when("/updateBlogForm",{
 		templateUrl:"blog/UpdateBlogForm.html"
 	})
@@ -65,9 +66,43 @@ myApp.config(function($routeProvider)
 	.when("/startChat",{
 		templateUrl:"chat/Chat.html"
 	})
+	.when("/viewSuggestedFriends",{
+		templateUrl:"friend/ViewSuggestedFriends.html"
+	})
+	.when("/showPendingRequests",{
+		templateUrl:"friend/ShowPendingRequests.html"
+	})
+	.when("/showAllFriends",{
+		templateUrl:"friend/ShowAllFriends.html"
+	})
+	.when("/adminHome",{
+		templateUrl:"admin/AdminHome.html"
+	})
+	.when("/listAllApprovedBlogs",{
+		templateUrl:"blog/ListAllApprovedBlogs.html"
+	})
+	.when("/viewPendingBlogs",{
+		templateUrl:"blog/ViewPendingBlogs.html"
+	})
+	.when("/ViewBlog",{
+		templateUrl:"blog/ViewBlog.html"
+	})
+	.when("/AddCommentForm",{
+		templateUrl:"blog/AddCommentForm.html"
+	})
+	.when("/addJobForm",{
+		templateUrl:"job/AddJob.html"
+	})
+	.when("/viewAllJobs",{
+		templateUrl:"job/ViewAllJobs.html"
+	})
+	.when("/viewAllAppliedJobs",{
+		templateUrl:"job/ViewAllAppliedJobs.html"
+	})
+	.when("/ViewAllComments",{
+		templateUrl:"blog/ViewAllComments.html"
+	})
 });
-
-
 myApp.run(function($rootScope,$cookieStore)
 		{
 			console.log('I am in run function');
